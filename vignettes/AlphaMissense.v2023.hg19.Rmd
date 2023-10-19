@@ -55,9 +55,14 @@ scores is to check the ones available to download.
 avgs <- readRDS(system.file("extdata", "avgs.rds", package="GenomicScores"))
 ```
 ```{r retrieve2, message=FALSE, cache=FALSE, eval=FALSE}
+library(GenomicScores)
+
 availableGScores()
 ```
-```{r, echo=FALSE}
+```{r, message=FALSE, cache=FALSE, echo=FALSE}
+library(AnnotationHub)
+library(GenomicScores)
+setAnnotationHubOption("MAX_DOWNLOADS", 30)
 avgs
 ```
 
@@ -65,8 +70,10 @@ The selected resource can be downloaded with the function getGScores().
 After the resource is downloaded the first time, the cached copy will
 enable a quicker retrieval later.
 
-```{r retrieve3, message=FALSE, cache=FALSE, eval=FALSE}
+```{r retrieve3, message=FALSE, cache=FALSE}
 am23 <- getGScores("AlphaMissense.v2023.hg19")
+am23
+citation(am23)
 ```
 
 Finally, the AlphaMissense pathogenicity score of a particular genomic position
@@ -80,7 +87,7 @@ classified as pathogenic in the ClinVar database, we should call `gscores()`
 as follows.
 
 
-```{r retrieve4, message=FALSE, eval=FALSE}
+```{r retrieve4, message=FALSE}
 gscores(am23, GRanges("chr7:44185175"), ref="C", alt="T")
 ```
 
