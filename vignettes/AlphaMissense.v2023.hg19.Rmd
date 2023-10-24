@@ -68,10 +68,15 @@ avgs
 
 The selected resource can be downloaded with the function getGScores().
 After the resource is downloaded the first time, the cached copy will
-enable a quicker retrieval later.
+enable a quicker retrieval later. In this case, because AlphaMissense
+scores are distributed under a
+[CC BY-NC-SA 4.0](https://github.com/google-deepmind/alphamissense#alphamissense-predictions-license) license, we should add the argument
+`accept.license=TRUE` to non-interactively obtain the data. If we
+do call `getGScores()` interactively without that argument, the function
+will ask us to accept the license.
 
 ```{r retrieve3, message=FALSE, cache=FALSE}
-am23 <- getGScores("AlphaMissense.v2023.hg19")
+am23 <- getGScores("AlphaMissense.v2023.hg19", accept.license=TRUE)
 am23
 citation(am23)
 ```
